@@ -5,6 +5,12 @@
 //  Created by Kenzo on 2/10/22.
 //
 
+/**
+ git add .
+  git commit -m "sjdqwfjqwb"
+  git push -u origin main
+ */
+
 import SwiftUI
 
 struct ContentView: View {
