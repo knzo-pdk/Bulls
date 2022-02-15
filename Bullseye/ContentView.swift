@@ -15,7 +15,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var alertIsVis: Bool = false
-    
+
     //UI content and layout
     var body: some View {
         VStack {
@@ -32,7 +32,7 @@ struct ContentView: View {
             // TODO: add views for slider row here.
             HStack{
                 Text("1")
-                
+                Slider(value: .constant(10))
                 Text("100")
             }
             
