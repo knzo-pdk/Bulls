@@ -15,7 +15,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var alertIsVis: Bool = false
-
+    @State var sliderValue: Double = 50.0
     //UI content and layout
     var body: some View {
         VStack {
@@ -33,7 +33,8 @@ struct ContentView: View {
             // TODO: add views for slider row here.
             HStack{
                 Text("1")
-                Slider(value: .constant(10))
+                Slider(value: self.$sliderValue,
+                       in:1...100)
                 Text("100")
             }
             
@@ -45,7 +46,7 @@ struct ContentView: View {
             .alert(isPresented: self.$alertIsVis){
                 Alert(
                     title: Text("Hello there!"),
-                    message: Text("This is my first pop-up."),
+                    message: Text("The slider value is: \(self.sliderValue)"),
                     dismissButton: .default(Text("Awesome!")))
             }
             Spacer()
