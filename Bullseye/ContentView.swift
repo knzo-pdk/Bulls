@@ -20,6 +20,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             
+            Spacer()
             // Target row
             HStack {
                 Text("Put the bullseye as close as you can to:")
@@ -27,7 +28,7 @@ struct ContentView: View {
                 Text("100")
             }
             
-            
+            Spacer()
             //Slider row
             // TODO: add views for slider row here.
             HStack{
@@ -47,10 +48,25 @@ struct ContentView: View {
                     message: Text("This is my first pop-up."),
                     dismissButton: .default(Text("Awesome!")))
             }
-            
+            Spacer()
             // Score row
             // TODO: add views for the score, rounds, and start and info buttons
-            
+            HStack{
+                Button("Start over"){
+                    
+                }
+                Spacer()
+                Text("Score:")
+                Text("9999")
+                Spacer()
+                Text("Round:")
+                Text("999")
+                Spacer()
+                Button("Info"){
+                    
+                }
+            }
+            .padding(.bottom, 20)
         }
     }
     
