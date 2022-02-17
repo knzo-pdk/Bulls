@@ -14,9 +14,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var alertIsVis: Bool = false
-    @State var sliderValue: Double = 50.0
-    @State var targetValue: Int = Int.random(in: 0...100)
+    @State var alertIsVis = false
+    @State var sliderValue = 50.0
+    @State var targetValue = Int.random(in: 0...100)
     
     //single source of truth slider value
     var sliderValRounded: Int{
@@ -100,7 +100,6 @@ struct ContentView: View {
         return "The slider value is \(sliderValRounded).\n" +
         "The target value is \(targetValue).\n" +
         "You scored \(scoreCalculator()) points this round."
-        
     }
 }
 
