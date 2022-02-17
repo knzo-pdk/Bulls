@@ -82,7 +82,7 @@ struct ContentView: View {
      var sliderValue:
      var targetValue:*/
     func scoreCalculator()-> Int{
-        var diff: Int
+        let diff: Int
         let sliderVal = Int(sliderValue)
         if sliderVal > targetValue {
             diff = sliderVal - targetValue
