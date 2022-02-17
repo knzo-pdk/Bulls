@@ -49,9 +49,9 @@ struct ContentView: View {
             .alert(isPresented: self.$alertIsVis){
                 Alert(
                     title: Text("Hello there!"),
-                    message: Text("The slider value is: \(Int(sliderValue.rounded())).\n") +
-                             Text("The target value is:: \(targetValue).\n") +
-                             Text("You scored \(scoreCalculator()) points this round") ,
+                    message: Text("The slider value is \(Int(sliderValue.rounded())).\n") +
+                             Text("The target value is \(targetValue).\n") +
+                             Text("You scored \(scoreCalculator()) points this round.") ,
                     dismissButton: .default(Text("Awesome!")))
             }
             Spacer()
