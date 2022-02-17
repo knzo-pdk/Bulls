@@ -16,7 +16,7 @@ import SwiftUI
 struct ContentView: View {
     @State var alertIsVis: Bool = false
     @State var sliderValue: Double = 50.0
-    @State var targetValue: Int = Int.random(in: 1...100)
+    @State var targetValue: Int = Int.random(in: 0...100)
     
     //UI content and layout
     var body: some View {
@@ -27,7 +27,7 @@ struct ContentView: View {
             HStack {
                 Text("Put the bullseye as close as you can to:")
                     .fontWeight(.semibold)
-                Text("\(self.targetValue)")
+                Text("\(targetValue)")
             }
             
             Spacer()
@@ -42,13 +42,16 @@ struct ContentView: View {
             
             // Button row
             Button("Hit me!") {
+                print("Points awarded: \(scoreCalculator())")
                 print("Button pressed!")
                 self.alertIsVis = true
             }
             .alert(isPresented: self.$alertIsVis){
                 Alert(
                     title: Text("Hello there!"),
-                    message: Text("The slider value is: \(Int(sliderValue.rounded()))"),
+                    message: Text("The slider value is: \(Int(sliderValue.rounded())).\n") +
+                             Text("The target value is:: \(targetValue).\n") +
+                             Text("You scored \(scoreCalculator()) points this round") ,
                     dismissButton: .default(Text("Awesome!")))
             }
             Spacer()
@@ -75,8 +78,19 @@ struct ContentView: View {
     
     // Methods
     // =======
-    func score()-> Int{
-        return 100
+    /**
+     var sliderValue:
+     var targetValue:*/
+    func scoreCalculator()-> Int{
+        var diff: Int
+        if Int(sliderValue) > targetValue {
+            diff = Int(sliderValue) - targetValue
+        } else if Int(sliderValue) < targetValue {
+            diff = targetValue - Int(sliderValue)
+        } else {
+            diff = 0
+        }
+        return 100 - diff
     }
 }
 
