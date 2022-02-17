@@ -16,6 +16,8 @@ import SwiftUI
 struct ContentView: View {
     @State var alertIsVis: Bool = false
     @State var sliderValue: Double = 50.0
+    @State var targetValue: Int = Int.random(in: 1...100)
+    
     //UI content and layout
     var body: some View {
         VStack {
@@ -25,7 +27,7 @@ struct ContentView: View {
             HStack {
                 Text("Put the bullseye as close as you can to:")
                     .fontWeight(.semibold)
-                Text("100")
+                Text("\(self.targetValue)")
             }
             
             Spacer()
@@ -46,7 +48,7 @@ struct ContentView: View {
             .alert(isPresented: self.$alertIsVis){
                 Alert(
                     title: Text("Hello there!"),
-                    message: Text("The slider value is: \(self.sliderValue.rounded())"),
+                    message: Text("The slider value is: \(Int(sliderValue.rounded()))"),
                     dismissButton: .default(Text("Awesome!")))
             }
             Spacer()
@@ -73,6 +75,9 @@ struct ContentView: View {
     
     // Methods
     // =======
+    func score()-> Int{
+        return 100
+    }
 }
 
 
