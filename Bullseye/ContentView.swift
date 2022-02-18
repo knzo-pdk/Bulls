@@ -17,7 +17,8 @@ struct ContentView: View {
     @State var alertIsVis = false
     @State var sliderValue = 50.0
     @State var targetValue = Int.random(in: 0...100)
-    
+    @State var score = 0
+    @State var round = 0
     //single source of truth slider value
     var sliderValRounded: Int{
         Int(self.sliderValue.rounded())
@@ -26,7 +27,7 @@ struct ContentView: View {
     //UI content and layout
     var body: some View {
         VStack {
-            
+
             Spacer()
             // Target row
             HStack {
@@ -47,9 +48,14 @@ struct ContentView: View {
             
             // Button row
             Button("Hit me!") {
+                let newScore: Int
                 print("Points awarded: \(scoreCalculator())")
+                newScore = scoreCalculator()
                 print("Button pressed!")
                 self.alertIsVis = true
+                score = newScore + score
+                round = round + 1
+                targetValue = Int.random(in: 0...100)
             }
             .alert(isPresented: self.$alertIsVis){
                 Alert(
@@ -66,10 +72,10 @@ struct ContentView: View {
                 }
                 Spacer()
                 Text("Score:")
-                Text("9999")
+                Text("\(score)")
                 Spacer()
                 Text("Round:")
-                Text("999")
+                Text("\(round)")
                 Spacer()
                 Button("Info"){
                     
@@ -85,8 +91,9 @@ struct ContentView: View {
      var sliderValue:
      var targetValue:*/
     func scoreCalculator()-> Int{
+        let maximumScore = 100
         let diff = abs(sliderValRounded - targetValue)
-        return 100 - diff
+        return maximumScore - diff
     }
     
     func scoringMessage()-> String{
@@ -95,8 +102,6 @@ struct ContentView: View {
         "You scored \(scoreCalculator()) points this round."
     }
 }
-
-
 
 // Preview
 // =======
