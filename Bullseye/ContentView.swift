@@ -50,15 +50,17 @@ struct ContentView: View {
             Button("Hit me!") {
                 print("Points awarded: \(scoreCalculator())")
                 self.alertIsVis = true
-                score = scoreCalculator() + score
-                round = round + 1
-                targetValue = Int.random(in: 0...100)
+                
             }
             .alert(isPresented: self.$alertIsVis){
                 Alert(
                     title: Text("Hello there!"),
                     message: Text(scoringMessage()),
-                    dismissButton: .default(Text("Awesome!")))
+                    dismissButton: .default(Text("Awesome!")) {
+                        targetValue = Int.random(in: 0...100)
+                        score = scoreCalculator() + score
+                        round = round + 1
+                    })
             }
             Spacer()
             // Score row
