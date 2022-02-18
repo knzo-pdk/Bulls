@@ -48,12 +48,9 @@ struct ContentView: View {
             
             // Button row
             Button("Hit me!") {
-                let newScore: Int
                 print("Points awarded: \(scoreCalculator())")
-                newScore = scoreCalculator()
-                print("Button pressed!")
                 self.alertIsVis = true
-                score = newScore + score
+                score = scoreCalculator() + score
                 round = round + 1
                 targetValue = Int.random(in: 0...100)
             }
