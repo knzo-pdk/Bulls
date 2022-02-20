@@ -54,7 +54,7 @@ struct ContentView: View {
             }
             .alert(isPresented: self.$alertIsVis){
                 Alert(
-                    title: Text("Hello there!"),
+                    title: Text(alertMessage()),
                     message: Text(scoringMessage()),
                     dismissButton: .default(Text("Awesome!")) {
                         targetValue = Int.random(in: 0...100)
@@ -99,6 +99,22 @@ struct ContentView: View {
         return "The slider value is \(sliderValRounded).\n" +
         "The target value is \(targetValue).\n" +
         "You scored \(scoreCalculator()) points this round."
+    }
+    
+    func alertMessage()-> String{
+        var aMessage: String
+        let absPoint = targetValue - scoreCalculator()
+        if absPoint == 0 {
+            aMessage = "Perfect!"
+        }else if (absPoint > 0 && absPoint < 5){
+            aMessage = "You almost had it!"
+        }
+        else if (absPoint > 5 && absPoint <= 10) {
+            aMessage = "Not bad."
+        }else {
+            aMessage = "Are you even trying?"
+        }
+        return aMessage
     }
 }
 
