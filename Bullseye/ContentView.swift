@@ -103,13 +103,13 @@ struct ContentView: View {
     
     func alertMessage()-> String{
         var aMessage: String
-        let absPoint = targetValue - scoreCalculator()
+        let absPoint = abs(targetValue - sliderValRounded)
         if absPoint == 0 {
             aMessage = "Perfect!"
-        }else if (absPoint > 0 && absPoint < 5){
+        }else if (absPoint < 5){
             aMessage = "You almost had it!"
         }
-        else if (absPoint > 5 && absPoint <= 10) {
+        else if (absPoint <= 10) {
             aMessage = "Not bad."
         }else {
             aMessage = "Are you even trying?"
