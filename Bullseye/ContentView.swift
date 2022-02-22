@@ -57,10 +57,14 @@ struct ContentView: View {
                     title: Text(alertMessage()),
                     message: Text(scoringMessage()),
                     dismissButton: .default(Text("Awesome!")) {
+                        if score == 0 {
+                            score = score
+                        }
+                        else{
+                            score = scoreCalculator() + score
+                        }
                         targetValue = Int.random(in: 0...100)
-                        score = scoreCalculator() + score
                         round = round + 1
-                        sliderValue = 0
                     })
             }
             Spacer()
@@ -71,6 +75,7 @@ struct ContentView: View {
                     targetValue = Int.random(in: 0...100)
                     score = 0
                     round = 0
+                    sliderValue = 0
                 }
                 Spacer()
                 Text("Score:")
