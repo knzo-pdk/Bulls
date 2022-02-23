@@ -15,7 +15,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var alertIsVis = false
-    @State var sliderValue = 50.0
+    @State var sliderValue = Double.random(in: 0...100)
     @State var targetValue = Int.random(in: 0...100)
     @State var score = 0
     @State var round = 0
@@ -41,7 +41,7 @@ struct ContentView: View {
             // TODO: add views for slider row here.
             HStack{
                 Text("1")
-                Slider(value: self.$sliderValue,
+                Slider(value: $sliderValue,
                        in:1...100)
                 Text("100")
             }
@@ -49,22 +49,15 @@ struct ContentView: View {
             // Button row
             Button("Hit me!") {
                 print("Points awarded: \(scoreCalculator())")
-                self.alertIsVis = true
+                alertIsVis = true
                 
             }
-            .alert(isPresented: self.$alertIsVis){
+            .alert(isPresented: $alertIsVis){
                 Alert(
                     title: Text(alertMessage()),
                     message: Text(scoringMessage()),
                     dismissButton: .default(Text("Awesome!")) {
-                        if round == 0 {
-                            score = scoreCalculator()
-                        }
-                        else{
-                            score = scoreCalculator() + score
-                        }
-                        targetValue = Int.random(in: 0...100)
-                        round = round + 1
+                        newRound()
                     })
             }
             Spacer()
@@ -72,10 +65,7 @@ struct ContentView: View {
             // TODO: add views for the score, rounds, and start and info buttons
             HStack{
                 Button("Start over"){
-                    targetValue = Int.random(in: 0...100)
-                    score = 0
-                    round = 0
-                    sliderValue = 50
+                    startOver()
                 }
                 Spacer()
                 Text("Score:")
@@ -97,6 +87,13 @@ struct ContentView: View {
     /**
      var sliderValue:
      var targetValue:*/
+    func startOver(){
+        targetValue = Int.random(in: 0...100)
+        score = 0
+        round = 1
+        sliderValue = Double.random(in: 0...100)
+    }
+    
     func scoreCalculator()-> Int{
         let maximumScore = 100
         let diff = abs(sliderValRounded - targetValue)
@@ -123,6 +120,17 @@ struct ContentView: View {
             aMessage = "Are you even trying?"
         }
         return aMessage
+    }
+    
+    func newRound(){
+        if round == 0 {
+            score = scoreCalculator()
+        }
+        else{
+            score = scoreCalculator() + score
+        }
+        targetValue = Int.random(in: 0...100)
+        round = round + 1
     }
 }
 
